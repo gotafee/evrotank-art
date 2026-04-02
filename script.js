@@ -396,7 +396,7 @@ if (mapContainer && typeof ymaps !== "undefined") {
       location,
       {
         balloonContentHeader: "Завод ЕвроТанк",
-        balloonContentBody: "ул. Телегина 41, оф 23",
+        balloonContentBody: "ул. Телегина 41, оф 17",
         hintContent: "Завод ЕвроТанк",
       },
       {
