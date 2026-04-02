@@ -188,6 +188,21 @@ const productData = {
       "./assets/catalog/catalog-8-5.jpg",
     ],
   },
+  bull: {
+    title: "Статуя «Бык»<br />из нержавеющей стали",
+    paragraphs: [
+      "Современная скульптура для интерьеров, общественных пространств и галерей.",
+      "Выразительная форма с геометрическими гранями создает динамичный визуальный акцент и подчеркивает статус пространства.",
+      "Может использоваться как центральный элемент композиции или самостоятельный арт-объект.",
+    ],
+    slides: [
+      "./assets/catalog/catalog-bull.jpg",
+      "./assets/catalog/catalog-bull-2.jpg",
+      "./assets/catalog/catalog-bull-3.jpg",
+      "./assets/catalog/catalog-bull-4.jpg",
+      "./assets/catalog/catalog-bull-5.jpg",
+    ],
+  },
   sofa: {
     title: "Диван<br />из нержавеющей стали",
     paragraphs: [

@@ -426,7 +426,7 @@ section[id] {
   overflow: hidden;
   background:
     linear-gradient(rgba(0, 0, 0, 0.44), rgba(0, 0, 0, 0.44)),
-    url("./assets/about/about-1.jpg") center center / cover no-repeat;
+    url("./assets/about/about-2.jpg") center center / cover no-repeat;
   color: var(--color-white);
 }
 
