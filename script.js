@@ -334,6 +334,16 @@ if (requestForm) {
 
     const submitButton = requestForm.querySelector(".modal-form__submit");
     const formData = new FormData(requestForm);
+    const fullName = String(formData.get("name") || "").trim();
+    const phone = String(formData.get("phone") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const endpoint = (requestForm.dataset.endpoint || "").trim();
+    const payload = {
+      name: fullName,
+      phone,
+      email,
+      source: "evrotank-art.ru",
+    };
 
     if (modalStatus) {
       modalStatus.textContent = "Отправляем заявку...";
@@ -344,16 +354,26 @@ if (requestForm) {
     }
 
     try {
-      const response = await fetch(requestForm.action, {
+      if (!endpoint || endpoint.includes("REPLACE_WITH_FUNCTION_ID")) {
+        throw new Error("LEAD_ENDPOINT_NOT_CONFIGURED");
+      }
+
+      const response = await fetch(endpoint, {
         method: "POST",
-        body: formData,
         headers: {
+          "Content-Type": "application/json",
           Accept: "application/json",
         },
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
         throw new Error("Form submit failed");
+      }
+
+      const result = await response.json().catch(() => ({}));
+      if (result && result.ok === false) {
+        throw new Error(String(result.error || "Form submit failed"));
       }
 
       requestForm.reset();
@@ -370,8 +390,12 @@ if (requestForm) {
       }, 1400);
     } catch (error) {
       if (modalStatus) {
-        modalStatus.textContent =
-          "Не удалось отправить заявку. Попробуйте еще раз чуть позже.";
+        if (String(error?.message || "").includes("LEAD_ENDPOINT_NOT_CONFIGURED")) {
+          modalStatus.textContent = "Форма еще не настроена. Сообщите менеджеру, чтобы подключил почтовый endpoint.";
+        } else {
+          modalStatus.textContent =
+            "Не удалось отправить заявку. Попробуйте еще раз чуть позже.";
+        }
       }
     } finally {
       if (submitButton) {
